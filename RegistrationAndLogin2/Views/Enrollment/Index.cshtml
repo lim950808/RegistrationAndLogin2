@@ -1,0 +1,116 @@
+﻿@model RegistrationAndLogin2.Models.Enroll
+
+@{
+    ViewBag.Title = "Index";
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>회원가입</title>
+    <link href="http://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css" />
+    <script type="text/javascript" src="http://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link href="../../Content/StyleSheet.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="~/Scripts/jquery-1.7.1.js"></script>
+    <script type="text/javascript" src="~/Scripts/jquery.validate.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/passwordscheck.js"></script>
+    <link href="~/Scripts/passwordscheck.css" rel="stylesheet" />
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+</head>
+<body>
+    <!------ Include the above in your HEAD tag ---------->
+    @using (Html.BeginForm("Index", "Enrollment", FormMethod.Post))
+    {
+        <div class="container register">
+            <div class="row">
+                <div class="col-md-3 register-left">
+                    <img src="https://image.ibb.co/n7oTvU/logo_white.png" alt="" />
+                    <h1>환영합니다.</h1>
+                    <p>누구나 쉽게 시작할 수 있는 SNS판매의 시작 스룩페이!</p>
+                </div>
+                <div class="col-md-9 register-right">
+                    <ul class="nav nav-tabs nav-justified" id="myTab" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link" id="profile-tab" data-toggle="tab" href="../UserLogin/Index" role="tab" aria-controls="profile" aria-selected="false">로그인</a>
+                        </li>
+                    </ul>
+                    <pre>
+
+                    </pre>
+                    <hr />
+                    <div class="tab-content" id="myTabContent">
+                        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                            <h3 class="register-heading">회원가입</h3>
+                            <div class="row register-form">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        @Html.TextBoxFor(e => e.FirstName, new { @class = "form-control", placeholder = "First Name(이름) *" })
+                                        @Html.ValidationMessageFor(e => e.FirstName)
+                                    </div>
+                                    <div class="form-group">
+                                        @Html.TextBoxFor(e => e.LastName, new { @class = "form-control", placeholder = "Last Name(성) *" })
+                                        @Html.ValidationMessageFor(e => e.LastName)
+                                    </div>
+                                    <div class="form-group">
+                                        @Html.PasswordFor(e => e.Password, new { id = "password", @class = "form-control", placeholder = "비밀번호 *" })
+                                        <span id="result"></span>
+                                        @Html.ValidationMessageFor(e => e.Password)
+                                    </div>
+                                    <div class="form-group">
+                                        @Html.PasswordFor(e => e.Confirmpwd, new { @class = "form-control", placeholder = "비밀번호 확인 *" })
+                                        @Html.ValidationMessageFor(e => e.Confirmpwd)
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="maxl">
+                                            @Html.RadioButtonFor(e => e.Gender, "Male", new { @class = "radio inline" })<span>남성</span>
+                                            @Html.RadioButtonFor(e => e.Gender, "Female", new { @class = "radio inline" })<span>여성</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        @Html.TextBoxFor(e => e.Email, new { @class = "form-control", placeholder = "Email *" })
+                                        @Html.ValidationMessageFor(e => e.Email)
+                                    </div>
+                                    <div class="form-group">
+                                        @Html.TextBoxFor(e => e.PhoneNumber, new { @class = "form-control", placeholder = "전화번호 *" })
+                                        @Html.ValidationMessageFor(e => e.PhoneNumber)
+
+                                    </div>
+                                    <div class="form-group">
+                                        <select class="form-control">
+                                            <option class="hidden" selected disabled>보안질문을 선택하세요.</option>
+                                            <option>나의 생년월일은? (ex. 950808)</option>
+                                            <option>어머니 성함은?</option>
+                                            <option>출신 초등학교는?</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        @Html.TextBoxFor(e => e.SecurityAnwser, new { @class = "form-control", placeholder = "답변 *" })
+                                        @Html.ValidationMessageFor(e => e.SecurityAnwser)
+
+                                    </div>
+                                    <input type="submit" class="btnRegister" value="등록" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <script type="text/javascript">
+                $(function () {
+                    var msg = '@ViewData["result"]';
+                    if (msg == '1')
+                    {
+                        alert("회원가입이 성공적으로 완료되었습니다.");
+                        window.location.href = "@Url.Action("Index", "Enrollment")";
+                    }
+                });
+            </script>
+        </div>
+    }
+</body>
+</html>    
